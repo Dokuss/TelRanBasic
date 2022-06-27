@@ -1,0 +1,78 @@
+sudo ./bootrom-step.sh
+[2022-06-10 15:35:30.997561] Waiting for bootrom
+[2022-06-10 15:35:38.284236] Found port = /dev/ttyACM0
+[2022-06-10 15:35:38.284643] Handshake
+
+* * * If you have a short attached, remove it now * * *
+* * * Press Enter to continue * * *
+
+
+[2022-06-10 15:35:40.289210] Init crypto engine
+[2022-06-10 15:35:40.310312] Disable caches
+[2022-06-10 15:35:40.310946] Disable bootrom range checks
+[2022-06-10 15:35:40.328877] Load payload from ../brom-payload/build/payload.bin = 0x4888 bytes
+[2022-06-10 15:35:40.335969] Send payload
+[2022-06-10 15:35:40.941849] Let's rock
+[2022-06-10 15:35:40.942919] Wait for the payload to come online...
+[2022-06-10 15:35:41.872219] all good
+[2022-06-10 15:35:41.873009] Check GPT
+[2022-06-10 15:35:42.251272] 
+[2022-06-10 15:35:42.251598] Sector size (logical): 512 bytes
+[2022-06-10 15:35:42.251924] Disk identifier (GUID): 92F9DCB2-1DD8-4A2A-B453-BAD8DE8919E7
+[2022-06-10 15:35:42.252172] Partition table holds up to 128 entries
+[2022-06-10 15:35:42.252415] This partition table begins at sector 2 and ends at sector 33
+[2022-06-10 15:35:42.252625] First usable sector is 34, last usable sector is 61071326
+[2022-06-10 15:35:42.252844] Other partition table is at sector 61071359
+[2022-06-10 15:35:42.253058] 
+[2022-06-10 15:35:42.253327] Number   Start (sector)     End (sector)  Size          Name            
+[2022-06-10 15:35:42.255024]     1             1024             7167  3.00 MiB      proinfo         
+[2022-06-10 15:35:42.255763]     2             7168            16383  4.50 MiB      PMT             
+[2022-06-10 15:35:42.256446]     3            16384            17407  512.00 KiB    lk              
+[2022-06-10 15:35:42.257129]     4            17408            18431  512.00 KiB    lk2             
+[2022-06-10 15:35:42.257810]     5            18432            51199  16.00 MiB     boot_x          
+[2022-06-10 15:35:42.258544]     6            51200            86015  17.00 MiB     recovery_x      
+[2022-06-10 15:35:42.259233]     7            86016            96255  5.00 MiB      tee1            
+[2022-06-10 15:35:42.259898]     8            96256           106495  5.00 MiB      tee2            
+[2022-06-10 15:35:42.260576]     9           106496           187391  39.50 MiB     metadata        
+[2022-06-10 15:35:42.261315]    10           187392           189439  1024.00 KiB   kb              
+[2022-06-10 15:35:42.262299]    11           189440           191487  1024.00 KiB   dkb             
+[2022-06-10 15:35:42.262975]    12           191488           192511  512.00 KiB    MISC            
+[2022-06-10 15:35:42.263654]    13           192512           208895  8.00 MiB      reserved        
+[2022-06-10 15:35:42.264324]    14           208896          3515391  1.58 GiB      system          
+[2022-06-10 15:35:42.265023]    15          3515392          4383743  424.00 MiB    cache           
+[2022-06-10 15:35:42.265691]    16          4383744         60619775  26.82 GiB     userdata        
+[2022-06-10 15:35:42.266521]    17         60619776         60845055  110.00 MiB    boot            
+[2022-06-10 15:35:42.267247]    18         60845056         61070335  110.00 MiB    recovery        
+[2022-06-10 15:35:42.302514] 
+[2022-06-10 15:35:42.302856] Check boot0
+[2022-06-10 15:35:42.544185] Check rpmb
+
+rpmb looks broken; if this is expected (i.e. you're retrying the exploit) press enter, otherwise terminate with Ctrl+C
+
+
+[2022-06-10 15:35:50.766945] Clear preloader header
+[8 / 8]
+[2022-06-10 15:35:51.184654] Downgrade rpmb
+[2022-06-10 15:35:51.186665] Recheck rpmb
+[2022-06-10 15:35:52.081217] rpmb downgrade ok
+[2022-06-10 15:35:52.081835] Flash preloader
+[272 / 272]
+[272 / 272]
+[2022-06-10 15:36:04.306882] Flash tz
+[6459 / 6459]
+[2022-06-10 15:38:23.222346] Flash lk
+[950 / 950]
+[2022-06-10 15:38:43.918867] Inject payload
+Traceback (most recent call last):
+  File "/home/dokuss/Desktop/Amazon Fire/Fire HD 8 7Gen (Douglas)/amonet-douglas-v1 (1).2/amonet/modules/main.py", line 256, in <module>
+    main()
+  File "/home/dokuss/Desktop/Amazon Fire/Fire HD 8 7Gen (Douglas)/amonet-douglas-v1 (1).2/amonet/modules/main.py", line 230, in main
+    flash_binary(dev, "../bin/boot.hdr", gpt["boot"][0], gpt["boot"][1] * 0x200)
+  File "/home/dokuss/Desktop/Amazon Fire/Fire HD 8 7Gen (Douglas)/amonet-douglas-v1 (1).2/amonet/modules/main.py", line 58, in flash_binary
+    flash_data(dev, data, start_block, max_size=0)
+  File "/home/dokuss/Desktop/Amazon Fire/Fire HD 8 7Gen (Douglas)/amonet-douglas-v1 (1).2/amonet/modules/main.py", line 47, in flash_data
+    dev.emmc_write(start_block + x, data[x * 0x200:(x + 1) * 0x200])
+  File "/home/dokuss/Desktop/Amazon Fire/Fire HD 8 7Gen (Douglas)/amonet-douglas-v1 (1).2/amonet/modules/common.py", line 215, in emmc_write
+    raise RuntimeError("device failure")
+RuntimeError: device failure
+
